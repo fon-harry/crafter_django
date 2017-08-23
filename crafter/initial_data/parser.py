@@ -57,13 +57,13 @@ def get_recipes(file_path):
 
 def main():
     # items
-    get_items('./data/items')
+    get_items('./data_/items')
 
     with open('items.json', 'w') as f:
         json.dump(items, f, indent=4)
 
     # recipes
-    # get_recipes('./data/recipes.xml')
+    # get_recipes('./data_/recipes.xml')
 
 
 if __name__ == '__main__':
