@@ -14,8 +14,8 @@ def add_items_from_file(file_path):
 
         new_item = Item(
                 id=child.get('id'),
-                name=child.get('type'),
-                type=child.get('name')
+                name=child.get('name'),
+                type=child.get('type')
         )
 
         new_item.save()
@@ -44,12 +44,12 @@ def add_recipes(file_path):
 
 def main():
     # items
-    # Item.objects.all().delete()
-    # add_items('./data/items')
-    # print('Items added: %i' % Item.objects.count())
+    Item.objects.all().delete()
+    add_items('./data/items')
+    print('Items added: %i' % Item.objects.count())
 
     # recipes
-    add_recipes('./data/recipes.xml')
+    # add_recipes('./data/recipes.xml')
 
 
 if __name__ == '__main__':
