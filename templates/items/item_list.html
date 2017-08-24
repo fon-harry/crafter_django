@@ -8,7 +8,7 @@
 
     {% for item in item_list %}
 
-        {{ item.item_id }},  <a href="{{ item.get_absolute_url }}">{{ item.item_name }}</a><br>
+        {{ item.id }}, {{ item.item_id }},  <a href="{{ item.get_absolute_url }}">{{ item.item_name }}</a><br>
 
     {% endfor %}
 
