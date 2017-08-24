@@ -5,12 +5,8 @@
     <title>Items</title>
 </head>
 <body>
-
     {% for item in item_list %}
-
-        {{ item.id }}, {{ item.item_id }},  <a href="{{ item.get_absolute_url }}">{{ item.item_name }}</a><br>
-
+        {{ item.id }}, {{ item.type }},  <a href="{{ item.get_absolute_url }}">{{ item.name }}</a><br>
     {% endfor %}
-
 </body>
 </html>
