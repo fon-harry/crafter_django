@@ -4,21 +4,35 @@ from lxml import etree
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'crafter.settings'
 django.setup()
-from items.models import Item
+from items.models import Item, ItemParam
 
 
 def add_items_from_file(file_path):
-    xml = etree.ElementTree(file=file_path)
-    root = xml.getroot()
-    for child in root:
-
+    xml_file = etree.ElementTree(file=file_path)
+    xml_tag_list = xml_file.getroot()
+    for xml_tag_item in xml_tag_list:
         new_item = Item(
-                id=child.get('id'),
-                name=child.get('name'),
-                type=child.get('type')
+                id=xml_tag_item.get('id'),
+                name=xml_tag_item.get('name'),
+                type=xml_tag_item.get('type')
         )
 
         new_item.save()
+
+        for i in xml_tag_item:
+            if i.tag == 'set':
+                new_param = ItemParam(
+                    item_id=new_item.id,
+                    name=i.attrib['name'],
+                    value=i.attrib['val']
+                )
+
+                new_param.save()
+
+            elif i.tag == 'for':
+                pass
+            else:
+                print('Item: %s with id: %s have non parsed tag: %s' % (xml_tag_item.get('name'), xml_tag_item.get('id'),i.tag))
 
 
 def add_items(items_path):
@@ -45,8 +59,9 @@ def add_recipes(file_path):
 def main():
     # items
     Item.objects.all().delete()
+    ItemParam.objects.all().delete()
     add_items('./data/items')
-    print('Items added: %i' % Item.objects.count())
+    print('Items added: %i with %i params' % (Item.objects.count(),ItemParam.objects.count()))
 
     # recipes
     # add_recipes('./data/recipes.xml')

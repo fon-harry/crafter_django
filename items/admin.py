@@ -1,5 +1,12 @@
 from django.contrib import admin
-from items.models import Item
+from items.models import Item, ItemParam
 
 
-admin.site.register(Item)
+class ParamInline(admin.TabularInline):
+    model = ItemParam
+
+
+class ItemAdmin(admin.ModelAdmin):
+    inlines = [ParamInline]
+
+admin.site.register(Item, ItemAdmin)
