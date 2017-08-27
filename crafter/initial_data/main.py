@@ -14,12 +14,12 @@ def add_items_from_file(file_path):
         for key in xml_tag_item.attrib:
             if key == 'id':
                 atr_id = xml_tag_item.attrib[key]
-            elif key == 'type':
-                atr_name = xml_tag_item.attrib[key]
             elif key == 'name':
+                atr_name = xml_tag_item.attrib[key]
+            elif key == 'type':
                 atr_type = xml_tag_item.attrib[key]
             else:
-                print('Atribut : %s in tag : %s not parsed.' % (key, xml_tag_item.tag))
+                print('Item atribut : %s in tag : %s not parsed.' % (key, xml_tag_item.tag))
 
         new_item = Item(
                 id=atr_id,
@@ -56,16 +56,32 @@ def add_items(items_path):
 
 
 def add_recipes(file_path):
-    xml = etree.ElementTree(file=file_path)
-    root = xml.getroot()
-    for child in root:
-        item_id = child.get('id')
-        recipe_name = child.get('name')
+    xml_file = etree.ElementTree(file=file_path)
+    xml_tag_list = xml_file.getroot()
+    for xml_tag_item in xml_tag_list:
+        for key in xml_tag_item.attrib:
+            if key == 'id':
+                atr_id = xml_tag_item.attrib[key]
+            elif key == 'name':
+                atr_name = xml_tag_item.attrib[key]
+            else:
+                print('Recipe atribut : %s in tag : %s not parsed.' % (key, xml_tag_item.tag))
 
-        print(item_id, recipe_name)
+        # print(atr_id, atr_name)
 
-        for stats in child:
-            print(stats.values())
+        for i in xml_tag_item:
+            if i.tag == 'recipe':
+                pass
+            elif i.tag == 'mpCost':
+                pass
+            elif i.tag == 'successRate':
+                pass
+            elif i.tag == 'production':
+                pass
+            elif i.tag == 'ingredient':
+                pass
+            else:
+                print('Recipe tag: %s not parsed.' % i.tag)
 
 
 def main():
@@ -76,6 +92,7 @@ def main():
     print('Items added: %i with %i params' % (Item.objects.count(), ItemParam.objects.count()))
 
     # recipes
+    # Recipes.objects.all().delete()
     # add_recipes('./data/recipes.xml')
 
 
