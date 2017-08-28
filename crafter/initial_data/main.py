@@ -67,19 +67,19 @@ def add_recipes(file_path):
             else:
                 print('Recipe atribut : %s in tag : %s not parsed.' % (key, xml_tag_item.tag))
 
-        # print(atr_id, atr_name)
+        print(atr_id, atr_name)
 
         for i in xml_tag_item:
             if i.tag == 'recipe':
-                pass
+                print(i.attrib['id'], i.attrib['level'], i.attrib['type'])
             elif i.tag == 'mpCost':
-                pass
+                print(i.text)
             elif i.tag == 'successRate':
-                pass
+                print(i.text)
             elif i.tag == 'production':
-                pass
+                print(i.attrib['id'], i.attrib['count'])
             elif i.tag == 'ingredient':
-                pass
+                print(i.attrib['id'], i.attrib['count'])
             else:
                 print('Recipe tag: %s not parsed.' % i.tag)
 
