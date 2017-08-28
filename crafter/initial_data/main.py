@@ -5,6 +5,7 @@ from lxml import etree
 os.environ['DJANGO_SETTINGS_MODULE'] = 'crafter.settings'
 django.setup()
 from items.models import Item, ItemParam
+from recipes.models import Recipe
 
 
 def add_items_from_file(file_path):
@@ -67,34 +68,49 @@ def add_recipes(file_path):
             else:
                 print('Recipe atribut : %s in tag : %s not parsed.' % (key, xml_tag_item.tag))
 
-        print(atr_id, atr_name)
+        new_recipe = Recipe(
+            id=atr_id,
+            name=atr_name
+        )
 
         for i in xml_tag_item:
             if i.tag == 'recipe':
-                print(i.attrib['id'], i.attrib['level'], i.attrib['type'])
+                new_recipe.item = Item.objects.get(pk=i.attrib['id'])
+                new_recipe.level = i.attrib['level']
+                new_recipe.type = i.attrib['type']
             elif i.tag == 'mpCost':
-                print(i.text)
+                new_recipe.mpCost = i.text
             elif i.tag == 'successRate':
-                print(i.text)
+                new_recipe.successRate = i.text
             elif i.tag == 'production':
+                pass
+            elif i.tag == 'ingredient':
+                pass
+            else:
+                print('Recipe tag: %s not parsed.' % i.tag)
+
+        new_recipe.save()
+
+        for i in xml_tag_item:
+            if i.tag == 'production':
                 print(i.attrib['id'], i.attrib['count'])
             elif i.tag == 'ingredient':
                 print(i.attrib['id'], i.attrib['count'])
-            else:
-                print('Recipe tag: %s not parsed.' % i.tag)
+
+
 
 
 def main():
     # items
-    Item.objects.all().delete()
-    ItemParam.objects.all().delete()
-    add_items('./data/items')
-    print('Items added: %i with %i params' % (Item.objects.count(), ItemParam.objects.count()))
+    # Item.objects.all().delete()
+    # ItemParam.objects.all().delete()
+    # add_items('./data/items')
+    # print('Items added: %i with %i params' % (Item.objects.count(), ItemParam.objects.count()))
 
     # recipes
-    # Recipes.objects.all().delete()
-    # add_recipes('./data/recipes.xml')
-
+    Recipe.objects.all().delete()
+    add_recipes('./data/recipes.xml')
+    print('Recipes added: %i' % Recipe.objects.count())
 
 if __name__ == '__main__':
     main()

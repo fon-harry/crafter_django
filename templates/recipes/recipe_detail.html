@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item.item_name }}</title>
+</head>
+<body>
+    id: {{ item.id }}<br>
+    type: {{ item.type }}<br>
+    name: {{ item.name }}<br>
+    =========PARAMS===============<br>
+    {% for param in item.itemparam_set.all %}
+       {{ param.name }}: {{ param.value }}<br>
+    {% endfor %}
+</body>
+</html>
