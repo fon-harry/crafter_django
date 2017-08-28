@@ -14,7 +14,7 @@
     successRate: {{ recipe.successRate }}<br>
     =========PRODUCTIONS===============<br>
     {% for production in recipe.recipeproduction_set.all %}
-       {{ production.item }}: {{ productions.count }}<br>
+       {{ production.item }}: {{ production.count }}<br>
     {% endfor %}
     =========INGREDIENTS===============<br>
     {% for ingredient in recipe.recipeingredient_set.all %}
