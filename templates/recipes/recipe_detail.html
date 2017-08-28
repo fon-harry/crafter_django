@@ -14,11 +14,11 @@
     successRate: {{ recipe.successRate }}<br>
     =========PRODUCTIONS===============<br>
     {% for production in recipe.recipeproduction_set.all %}
-       {{ production.item }}: {{ production.count }}<br>
+       <a href="{{ production.item.get_absolute_url }}">{{ production.item }}</a>: {{ production.count }}<br>
     {% endfor %}
     =========INGREDIENTS===============<br>
     {% for ingredient in recipe.recipeingredient_set.all %}
-       {{ ingredient.item }}: {{ ingredient.count }}<br>
+       <a href="{{ ingredient.item.get_absolute_url }}">{{ ingredient.item }}</a>: {{ ingredient.count }}<br>
     {% endfor %}
 
 </body>
