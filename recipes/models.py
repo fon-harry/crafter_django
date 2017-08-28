@@ -11,7 +11,19 @@ class Recipe(models.Model):
     successRate = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.item.name
 
     def get_absolute_url(self):
         return '/recipes/%i/' % self.id
+
+
+class RecipeProduction(models.Model):
+    recipe = models.ForeignKey(Recipe)
+    item = models.ForeignKey(Item)
+    count = models.IntegerField(default=0)
+
+
+class RecipeIngredient(models.Model):
+    recipe = models.ForeignKey(Recipe)
+    item = models.ForeignKey(Item)
+    count = models.IntegerField(default=0)

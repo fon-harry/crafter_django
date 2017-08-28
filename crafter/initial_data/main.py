@@ -5,7 +5,7 @@ from lxml import etree
 os.environ['DJANGO_SETTINGS_MODULE'] = 'crafter.settings'
 django.setup()
 from items.models import Item, ItemParam
-from recipes.models import Recipe
+from recipes.models import Recipe, RecipeProduction, RecipeIngredient
 
 
 def add_items_from_file(file_path):
@@ -93,24 +93,37 @@ def add_recipes(file_path):
 
         for i in xml_tag_item:
             if i.tag == 'production':
-                print(i.attrib['id'], i.attrib['count'])
+                new_production = RecipeProduction(
+                    recipe=new_recipe,
+                    item=Item.objects.get(pk=i.attrib['id']),
+                    count=i.attrib['count']
+                )
+                new_production.save()
             elif i.tag == 'ingredient':
-                print(i.attrib['id'], i.attrib['count'])
-
-
+                new_ingredient = RecipeIngredient(
+                    recipe=new_recipe,
+                    item=Item.objects.get(pk=i.attrib['id']),
+                    count=i.attrib['count']
+                )
+                new_ingredient.save()
 
 
 def main():
     # items
-    # Item.objects.all().delete()
-    # ItemParam.objects.all().delete()
-    # add_items('./data/items')
-    # print('Items added: %i with %i params' % (Item.objects.count(), ItemParam.objects.count()))
+    Item.objects.all().delete()
+    ItemParam.objects.all().delete()
+    add_items('./data/items')
+    print('Items added: %i with %i params' % (Item.objects.count(), ItemParam.objects.count()))
 
     # recipes
     Recipe.objects.all().delete()
+    RecipeProduction.objects.all().delete()
+    RecipeIngredient.objects.all().delete()
     add_recipes('./data/recipes.xml')
-    print('Recipes added: %i' % Recipe.objects.count())
+    print('Recipes added: %i, with %i productions and %i ingridients' % (
+        Recipe.objects.count(),
+        RecipeProduction.objects.count(),
+        RecipeIngredient.objects.count()))
 
 if __name__ == '__main__':
     main()

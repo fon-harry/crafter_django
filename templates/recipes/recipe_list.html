@@ -6,9 +6,7 @@
 </head>
 <body>
     {% for recipe in recipe_list %}
-{#        {{ item.id }}, {{ item.type }},  <a href="{{ item.get_absolute_url }}">{{ item.name }}</a><br>#}
-        {{ recipe.id }}, {{ recipe.name }}<br>
-
+        {{ recipe.id }}, <a href="{{ recipe.get_absolute_url }}">{{ recipe }}</a><br>
     {% endfor %}
 </body>
 </html>

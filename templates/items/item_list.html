@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for item in item_list %}
-        {{ item.id }}, {{ item.type }},  <a href="{{ item.get_absolute_url }}">{{ item.name }}</a><br>
+        {{ item.id }}, {{ item.type }},  <a href="{{ item.get_absolute_url }}">{{ item }}</a><br>
     {% endfor %}
 </body>
 </html>
