@@ -32,7 +32,7 @@ def add_items_from_file(file_path):
         for i in xml_tag_item:
             if i.tag == 'set':
                 new_param = ItemParam(
-                    item_id=new_item.id,
+                    item=new_item,
                     name=i.attrib['name'],
                     value=i.attrib['val']
                 )
