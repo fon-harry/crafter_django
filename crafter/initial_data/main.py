@@ -45,7 +45,8 @@ def add_items_from_file(file_path):
             elif i.tag == 'cond':
                 pass
             else:
-                print('Item: %s with id: %s have non parsed tag: %s' % (xml_tag_item.get('name'), xml_tag_item.get('id'),i.tag))
+                print('Item: %s with id: %s have non parsed tag: %s' %
+                      (xml_tag_item.get('name'), xml_tag_item.get('id'), i.tag))
 
 
 def add_items(items_path):
