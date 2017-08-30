@@ -12,5 +12,9 @@
     {% for param in item.itemparam_set.all %}
        {{ param.name }}: {{ param.value }}<br>
     {% endfor %}
+    {% if item.recipe %}
+    =========CRAFT================<br>
+        <a href="{{ item.recipe.get_absolute_url }}">{{ item.recipe }}</a><br>
+    {% endif %}
 </body>
 </html>

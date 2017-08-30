@@ -4,7 +4,7 @@ from items.models import Item
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
-    item = models.ForeignKey(Item)
+    item = models.OneToOneField(Item)
     level = models.IntegerField(default=0)
     type = models.CharField(max_length=200)
     mpCost = models.IntegerField(default=0)
