@@ -14,7 +14,7 @@ class Recipe(models.Model):
         return self.item.name
 
     def get_absolute_url(self):
-        return '/recipes/%i/' % self.id
+        return '/recipes/%i/' % self.id  # TODO fix to reverse()
 
 
 class RecipeProduction(models.Model):

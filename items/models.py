@@ -9,7 +9,7 @@ class Item(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return '/items/%i/' % self.id
+        return '/items/%i/' % self.id  # TODO fix to reverse()
 
 
 class ItemParam(models.Model):
