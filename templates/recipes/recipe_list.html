@@ -1,12 +1,13 @@
+{% load render_table from django_tables2 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
 </head>
 <body>
-    {% for recipe in recipe_list %}
-        {{ recipe.id }}, <a href="{{ recipe.get_absolute_url }}">{{ recipe }}</a><br>
-    {% endfor %}
+    {% render_table table %}
 </body>
 </html>
