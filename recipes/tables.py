@@ -7,4 +7,5 @@ class RecipeTable(tables.Table):
 
     class Meta:
         model = Recipe
+        exclude = ('name', 'type', 'mpCost', 'successRate',)
         attrs = {'class': 'paleblue'}
