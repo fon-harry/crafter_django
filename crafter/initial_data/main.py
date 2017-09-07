@@ -80,9 +80,9 @@ def add_recipes(file_path):
                 new_recipe.level = i.attrib['level']
                 new_recipe.type = i.attrib['type']
             elif i.tag == 'mpCost':
-                new_recipe.mpCost = i.text
+                new_recipe.mp_cost = i.text
             elif i.tag == 'successRate':
-                new_recipe.successRate = i.text
+                new_recipe.success_rate = i.text
             elif i.tag == 'production':
                 pass
             elif i.tag == 'ingredient':
@@ -121,10 +121,11 @@ def main():
     RecipeProduction.objects.all().delete()
     RecipeIngredient.objects.all().delete()
     add_recipes('./data/recipes.xml')
-    print('Recipes added: %i, with %i productions and %i ingridients' % (
+    print('Recipes added: %i, with %i productions and %i ingredients' % (
         Recipe.objects.count(),
         RecipeProduction.objects.count(),
         RecipeIngredient.objects.count()))
+
 
 if __name__ == '__main__':
     main()

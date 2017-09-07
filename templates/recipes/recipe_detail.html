@@ -10,8 +10,8 @@
     recipe_item: {{ recipe.item }}<br>
     level: {{ recipe.level }}<br>
     type: {{ recipe.type }}<br>
-    mpCost: {{ recipe.mpCost }}<br>
-    successRate: {{ recipe.successRate }}<br>
+    mp_cost: {{ recipe.mpCost }}<br>
+    success_rate: {{ recipe.successRate }}<br>
     =========PRODUCTIONS===============<br>
     {% for production in recipe.recipeproduction_set.all %}
        <a href="{{ production.item.get_absolute_url }}">{{ production.item }}</a>: {{ production.count }}<br>

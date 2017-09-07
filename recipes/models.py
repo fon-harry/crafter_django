@@ -7,8 +7,8 @@ class Recipe(models.Model):
     item = models.OneToOneField(Item)
     level = models.IntegerField(default=0)
     type = models.CharField(max_length=200)
-    mpCost = models.IntegerField(default=0)
-    successRate = models.IntegerField(default=0)
+    mp_cost = models.IntegerField(default=0)
+    success_rate = models.IntegerField(default=0)
 
     def __str__(self):
         return self.item.name
