@@ -22,8 +22,14 @@ class RecipeProduction(models.Model):
     item = models.ForeignKey(Item)
     count = models.IntegerField(default=0)
 
+    def __str__(self):
+        return '%s (%i)' % (self.item.name, self.count)
+
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe)
     item = models.ForeignKey(Item)
     count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return '%s (%i)' % (self.item.name, self.count)
